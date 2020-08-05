@@ -1,0 +1,181 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-payment" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+            </div>
+            <h1><img src="view/image/payment/sigla_po_58x22.png" alt="" /> {{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+        <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{heading_title}}<br /><small>{{text_PO_version}}</small></h3>
+            </div>
+            <h4 class="alert alert-info text-center">{{text_fill_required_info}}</h4>
+            <div class="panel-body">
+                <form action="{{action}}" method="post" enctype="multipart/form-data" id="form-payment" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_f_login">{{entry_f_login}}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_plationline_f_login" value="{{payment_plationline_f_login}}" class="form-control"/>
+                            {% if error_f_login %}
+                                <div class="text-danger">{{error_f_login}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_rsa_auth">{{entry_rsa_auth}}</label>
+                        <div class="col-sm-10">
+                            <textarea name="payment_plationline_rsa_auth" rows="5" cols="100" class="form-control">{{payment_plationline_rsa_auth}}</textarea>
+                            {% if error_rsa_auth %}
+                                <div class="text-danger">{{error_rsa_auth}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_rsa_itsn">{{entry_rsa_itsn}}</label>
+                        <div class="col-sm-10">
+                            <textarea name="payment_plationline_rsa_itsn" rows="5" cols="100" class="form-control">{{payment_plationline_rsa_itsn}}</textarea>
+                            {% if error_rsa_itsn %}
+                                <div class="text-danger">{{error_rsa_itsn}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_iv_auth">{{entry_iv_auth}}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_plationline_iv_auth" size="97" class="form-control" value="{{payment_plationline_iv_auth}}" />
+                            {% if error_iv_auth %}
+                                <div class="text-danger">{{error_iv_auth}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_iv_itsn">{{entry_iv_itsn}}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_plationline_iv_itsn" size="97" class="form-control" value="{{payment_plationline_iv_itsn}}" />
+                            {% if error_iv_itsn %}
+                                <div class="text-danger">{{error_iv_itsn}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_relay_method">{{entry_relay_method}}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_plationline_relay_method" class="form-control">
+                                <option value="POST_S2S_PO_PAGE" {{payment_plationline_relay_method=='POST_S2S_PO_PAGE'?'selected':''}}>POST_S2S_PO_PAGE</option>
+                                <option value="PTOR" {{payment_plationline_relay_method=='PTOR'?'selected':''}}>PTOR</option>
+                                <option value="POST_S2S_MT_PAGE" {{payment_plationline_relay_method=='POST_S2S_MT_PAGE'?'selected':''}}>POST_S2S_MT_PAGE</option>
+                                <option value="SOAP_PO_PAGE" {{payment_plationline_relay_method=='SOAP_PO_PAGE'?'selected':''}}>SOAP_PO_PAGE</option>
+                                <option value="SOAP_MT_PAGE" {{payment_plationline_relay_method=='SOAP_MT_PAGE'?'selected':''}}>SOAP_MT_PAGE</option>
+                            </select>
+                            <div class="margin-form" style="color: #900; float:none; vertical-align: middle;">
+                                <b>INFO:</b> Site-ul Dvs. {{is_secure?'<b>ARE</b>':'<b>NU ARE</b>'}} certificat SSL activ, din acest motiv va recomandam sa selectati metoda de raspuns <b>{{is_secure?'PTOR':'POST_S2S_PO_PAGE'}}</b>. {{is_secure?'Clientul VA FI redirectionat catre site-ul Dvs. dupa finalizarea platii, iar starea comenzii se va actualiza in magazinul online.':'Clientului i se va afisa pagina de raspuns PlatiOnline, iar starea comenzii se va actualiza in site-ul Dvs'}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_itsn_method">{{entry_itsn_method}}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_plationline_itsn_method" class="form-control">
+                                <option value="POST" {{payment_plationline_itsn_method=='POST'?'selected':''}}>POST</option>
+                            </select>
+                            <div class="margin-form" style="color: #900; float:none; vertical-align: middle;">
+                                <b>INFO:</b> Pentru a seta URL-ul ITSN accesati <a href="https://merchants.plationline.ro" target="_blank"><b>https://merchants.plationline.ro</b></a>, sectiunea <b>Settings</b>, tab-ul <b>Instant status notification</b>. Completati adresa <b> {{is_secure?constant('HTTPS_CATALOG'):constant('HTTP_CATALOG')}}index.php?route=extension/payment/plationline/itsn</b> si selectati metoda <b>POST</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_test">{{entry_test}}</label>
+                        <div class="col-sm-10">
+                            {% if payment_plationline_test %}
+                                <input type="radio" name="payment_plationline_test" value="1" checked="checked" />
+                                {{text_yes}}
+                                <input type="radio" name="payment_plationline_test" value="0" />
+                                {{text_no}}
+                            {% else %}
+                                <input type="radio" name="payment_plationline_test" value="1" />
+                                {{text_yes}}
+                                <input type="radio" name="payment_plationline_test" value="0" checked="checked" />
+                                {{text_no}}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_total">{{entry_total}}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_plationline_total" class="form-control" value="{{payment_plationline_total}}" />
+                        </div>
+                    </div>
+                    {% set po_statuses = ['pending', 'approved', 'on_hold', 'decline', 'error', 'settled', 'pending_settled', 'credited', 'pending_credited', 'voided', 'pending_voided', 'cbk', 'expired'] %}
+                    {% for po in po_statuses %}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="payment_plationline_order_status_{{po}}">{{_context["entry_order_status_"~po]}}</label>
+                            <div class="col-sm-10">
+                                <select name="payment_plationline_order_status_{{po}}" class="form-control">
+                                    {% for order_status in order_statuses %}
+                                        {% if order_status.order_status_id == _context["payment_plationline_order_status_"~po] or order_status.name ==  _context["entry_order_status_"~po] %}
+                                            <option value="{{order_status.order_status_id}}" selected="selected">{{order_status.name}}</option>
+                                        {% else %}
+                                            <option value="{{order_status.order_status_id}}">{{order_status.name}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_geo_zone_id">{{entry_geo_zone}}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_plationline_geo_zone_id" class="form-control">
+                                <option value="0">{{text_all_zones}}</option>
+                                {% for geo_zone in geo_zones %}
+                                    {% if geo_zone.geo_zone_id == plationline_payment_geo_zone_id %}
+                                        <option value="{{geo_zone.geo_zone_id}}" selected="selected">{{geo_zone.name}}</option>
+                                    {% else %}
+                                        <option value="{{geo_zone.geo_zone_id}}">{{geo_zone.name}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_status">{{entry_status}}</label>
+                        <div class="col-sm-10">
+                            <select name="payment_plationline_status" id="input-status" class="form-control">
+                                {% if payment_plationline_status %}
+                                    <option value="1" selected="selected">{{text_enabled}}</option>
+                                    <option value="0">{{text_disabled}}</option>
+                                {% else %}
+                                    <option value="1">{{text_enabled}}</option>
+                                    <option value="0" selected="selected">{{text_disabled}}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="payment_plationline_sort_order">{{entry_sort_order}}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_plationline_sort_order" class="form-control" value="{{payment_plationline_sort_order}}" size="1" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}
