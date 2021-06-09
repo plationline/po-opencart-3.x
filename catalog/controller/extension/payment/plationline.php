@@ -689,6 +689,19 @@ class ControllerExtensionPaymentPlatiOnline extends Controller {
 		}
 
 		foreach ($totals as $t) {
+			if ($t['code'] == 'tax') {
+				$item = array();
+				$item['prodid'] 	 = $t['code'];
+				$item['name'] 		 = substr(strip_tags( html_entity_decode( $t['title'], ENT_QUOTES ) ),0,250);
+				$item['description'] = '';
+				$item['qty'] 		 = 1;
+				$item['itemprice'] 	 = $this->currency->format($t['value'], $order_info['currency_code'], $order_info['currency_value'], false);
+				$item['vat'] 		 = 0;
+				$item['stamp'] 		 = date('Y-m-d');
+				$item['prodtype_id'] = 0;
+				$f_request['f_order_cart'][] = $item;
+			}
+
 			if ($t['code'] == 'coupon') {
 				$coupon1 = array();
 				$coupon1['key'] 		= $t['code'];
