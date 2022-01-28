@@ -6,7 +6,7 @@ $_['heading_title']      = 'PlatiOnline.ro';
 $_['text_payment']       = 'Plata';
 $_['text_success']       = 'Success: You have modified PlatiOnline.ro account details!';
 $_['text_plationline']	 = '<a onclick="window.open(\'https://www.plationline.ro\');"><img src="view/image/payment/sigla_po_58x22.png" alt="PlatiOnline" title="PlatiOnline" /></a>';
-$_['text_PO_version']	 = 'PO5 versiunea 20180306';
+$_['text_PO_version']	 = 'PO5 versiunea 20220128';
 $_['text_fill_required_info'] = 'Va rugam sa completati campurile de mai jos cu datele din <a href="https://merchants.plationline.ro" target="_blank"><b>contul de comerciant PlatiOnline</b></a>';
 
 // Entry
