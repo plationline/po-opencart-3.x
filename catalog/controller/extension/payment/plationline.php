@@ -758,7 +758,7 @@ class ControllerExtensionPaymentPlatiOnline extends Controller {
 		$po->test_mode = $this->config->get("payment_plationline_test");
 		$url_redirect = $po->auth($f_request, 2);
 		$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_plationline_order_status_pending'));
-		header('Set-Cookie:'. $this->config->get('session_name').'='. $this->session->getId(). '; SameSite = None; Secure');
+		setcookie($this->config->get('session_name'), $this->session->getId(), array('expires' => ini_get('session.cookie_lifetime'), 'path' => ini_get('session.cookie_path'), 'domain' => ini_get('session.cookie_domain'), 'samesite' => 'None', 'secure' => true, 'httponly' => true));
 		if (isset($this->session->data['order_id'])) {
 			$this->cart->clear();
 			unset($this->session->data['shipping_method']);

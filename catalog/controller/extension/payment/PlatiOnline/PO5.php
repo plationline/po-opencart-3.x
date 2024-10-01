@@ -378,13 +378,15 @@ if (!class_exists('PlatiOnline\PO5')) {
         {
             spl_autoload_extensions('.php'); // Only Autoload PHP Files
             spl_autoload_register(function ($classname) {
-                if (strpos($classname, '\\') !== false) {
-                    // Namespaced Classes
-                    $classfile = str_replace('\\', '/', $classname);
-                    if ($classname[0] !== '/') {
-                        $classfile = dirname(__FILE__).'/libraries/'.$classfile.'.php';
+                if (stripos($classname, 'plationline') !== false || stripos($classname, 'sylouuu') !== false || stripos($classname, 'phpseclib') !== false) {
+                    if (strpos($classname, '\\') !== false) {
+                        // Namespaced Classes
+                        $classfile = str_replace('\\', '/', $classname);
+                        if ($classname[0] !== '/') {
+                            $classfile = dirname(__FILE__).'/libraries/'.$classfile.'.php';
+                        }
+                        require($classfile);
                     }
-                    require($classfile);
                 }
             });
         }
