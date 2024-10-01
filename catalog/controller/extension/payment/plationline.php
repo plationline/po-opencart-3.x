@@ -693,7 +693,7 @@ class ControllerExtensionPaymentPlatiOnline extends Controller {
 		$c = 1;
 		$coupons = array();
 		foreach ($totals as $t) {
-			if ($t['code'] == 'tax') {
+			/*if ($t['code'] == 'tax') {
 				$item = array();
 				$item['prodid'] 	         = $t['code'];
 				$item['name'] 		         = substr(strip_tags( html_entity_decode( $t['title'], ENT_QUOTES ) ),0,250);
@@ -704,7 +704,7 @@ class ControllerExtensionPaymentPlatiOnline extends Controller {
 				$item['stamp'] 		         = date('Y-m-d');
 				$item['prodtype_id']         = 0;
 				$f_request['f_order_cart'][] = $item;
-			}
+			}*/
 
 			// daca avem reduceri, le adaugam la final
 			if ($t['value'] < 0) {
