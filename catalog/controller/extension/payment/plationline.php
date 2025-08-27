@@ -614,9 +614,13 @@ class ControllerExtensionPaymentPlatiOnline extends Controller {
 		if ($this->cart->hasShipping()) {
 			$shipping_info['same_info_as'] = 0;
 			//contact
-			$shipping_info['contact']['f_email'] 		 = $order_info['email'];
-			$shipping_info['contact']['f_phone'] 		 = $order_info['telephone'];
-			$shipping_info['contact']['f_mobile_number'] = $order_info['telephone'];
+            if ($order_info['email']) {
+                $shipping_info['contact']['f_email'] = $order_info['email'];
+            }
+            if ($order_info['telephone'] && strlen($order_info['telephone'])>=4) {
+                $shipping_info['contact']['f_phone'] = $order_info['telephone'];
+                $shipping_info['contact']['f_mobile_number'] = $order_info['telephone'];
+            }
 			$shipping_info['contact']['f_send_sms'] 	 = 1; // 1 - sms client notification 0 - no notification
 			$shipping_info['contact']['f_first_name'] 	 = substr($order_info['shipping_firstname'],0,50);
 			$shipping_info['contact']['f_last_name'] 	 = substr($order_info['shipping_lastname'],0,50);
