@@ -18,37 +18,6 @@ class ControllerExtensionPaymentPlatiOnline extends Controller {
 
 		$data = $this->get_all_po_statuses();
 
-		$data['heading_title'] = $this->language->get('heading_title');
-		$data['link'] = $this->language->get('text_PO_image');
-		$data['text_PO_version'] = $this->language->get('text_PO_version');
-		$data['text_fill_required_info'] = $this->language->get('text_fill_required_info');
-
-		$data['text_enabled'] = $this->language->get('text_enabled');
-		$data['text_disabled'] = $this->language->get('text_disabled');
-		$data['text_all_zones'] = $this->language->get('text_all_zones');
-		$data['text_yes'] = $this->language->get('text_yes');
-		$data['text_no'] = $this->language->get('text_no');
-
-		$data['entry_f_login'] 						= $this->language->get('entry_f_login');
-		$data['entry_rsa_auth'] 					= $this->language->get('entry_rsa_auth');
-		$data['entry_rsa_itsn'] 					= $this->language->get('entry_rsa_itsn');
-		$data['entry_iv_auth'] 						= $this->language->get('entry_iv_auth');
-		$data['entry_iv_itsn'] 						= $this->language->get('entry_iv_itsn');
-		$data['entry_relay_method'] 				= $this->language->get('entry_relay_method');
-		$data['entry_itsn_method'] 					= $this->language->get('entry_itsn_method');
-		$data['entry_info_itsn_url'] 				= $this->language->get('entry_info_itsn_url');
-		$data['entry_test'] 						= $this->language->get('entry_test');
-		$data['entry_total'] 						= $this->language->get('entry_total');
-		$data['entry_order_status'] 				= $this->language->get('entry_order_status');
-		$data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
-		$data['entry_status'] = $this->language->get('entry_status');
-		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
-
-		$data['button_save'] = $this->language->get('button_save');
-		$data['button_cancel'] = $this->language->get('button_cancel');
-
-		$data['tab_general'] = $this->language->get('tab_general');
-
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -100,21 +69,18 @@ class ControllerExtensionPaymentPlatiOnline extends Controller {
   		$data['breadcrumbs'] = array();
 
    		$data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'user_token=' . $this->session->data['user_token'], true),
-      		'separator' => false
+			'text' => $this->language->get('text_home'),
+			'href' => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true),
    		);
 
    		$data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get('text_payment'),
-			'href'      => $this->url->link('extension/payment', 'user_token=' . $this->session->data['user_token'], true),
-      		'separator' => ' :: '
+			'text' => $this->language->get('text_extension'),
+			'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=payment', true)
    		);
 
    		$data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('extension/payment/plationline', 'user_token=' . $this->session->data['user_token'], true),
-      		'separator' => ' :: '
+			'text' => $this->language->get('heading_title'),
+			'href' => $this->url->link('extension/payment/plationline', 'user_token=' . $this->session->data['user_token'], true),
    		);
 
 		$data['action'] = $this->url->link('extension/payment/plationline', 'user_token=' . $this->session->data['user_token'], true);
@@ -321,11 +287,7 @@ class ControllerExtensionPaymentPlatiOnline extends Controller {
 			$this->error['itsn_method'] = $this->language->get('error_itsn_method');
 		}
 
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}
+		return !$this->error;
 	}
 
 	public function install() {

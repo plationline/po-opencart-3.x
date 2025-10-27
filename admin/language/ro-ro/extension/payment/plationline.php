@@ -3,7 +3,7 @@
 $_['heading_title']      = 'PlatiOnline.ro';
 
 // Text
-$_['text_payment']       = 'Plata';
+$_['text_extension']     = 'Extensii';
 $_['text_success']       = 'Success: You have modified PlatiOnline.ro account details!';
 $_['text_plationline']	 = '<a onclick="window.open(\'https://www.plationline.ro\');"><img src="view/image/payment/sigla_po_58x22.png" alt="PlatiOnline" title="PlatiOnline" /></a>';
 $_['text_PO_version']	 = 'PO5 versiunea 20220128';
@@ -48,4 +48,3 @@ $_['error_iv_auth']      = 'Campul AUTHORIZATION INIT VECTOR este obligatoriu!';
 $_['error_iv_itsn']      = 'Campul ITSN INIT VECTOR este obligatoriu!';
 $_['error_relay_method'] = 'Campul Metoda de raspuns este obligatoriu!';
 $_['error_itsn_method']  = 'Campul Metoda ITSN este obligatoriu!';
-?>
